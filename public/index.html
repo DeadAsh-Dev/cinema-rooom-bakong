@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinema Room - Cambodia Luxury Private Cinema & Bakong KHQR</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cinemaRed: '#e50914',
+            cinemaGold: '#d4af37',
+            cinemaDark: '#0a0d14',
+            cinemaCard: '#121824',
+            bakongRed: '#d32f2f'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0a0d14] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-red-600 selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-red-900/60 via-red-800/40 to-slate-900 border-b border-red-500/20 text-xs py-1.5 px-4 text-center flex items-center justify-center gap-2">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-600/30 text-red-300 border border-red-500/30">
+      <i class="fa-solid fa-qrcode mr-1"></i> BAKONG KHQR READY
+    </span>
+    <span>Pay seamlessly with <strong>ABA Mobile, Bakong, Canadia, Wing, ACLEDA</strong> & all Cambodian Banking Apps!</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center shadow-lg shadow-red-600/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-film text-2xl text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-extrabold tracking-wider text-white font-heading">CINEMA<span class="text-red-500">ROOM</span></span>
+            <span class="text-[10px] font-bold tracking-widest uppercase bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30">VIP SUITES</span>
+          </div>
+          <p class="text-xs text-slate-400">Phnom Penh, Cambodia &bull; Bakong E-Commerce</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#rooms-section" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-couch text-red-500 text-xs"></i> Private Rooms
+        </a>
+        <a href="#movies-section" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-clapperboard text-red-500 text-xs"></i> Movies
+        </a>
+        <a href="#menu-section" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-burger text-red-500 text-xs"></i> Snacks & Bar
+        </a>
+        <a href="#khqr-spec-section" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-amber-400 text-xs"></i> KHQR Technology
+        </a>
+        <button onclick="openAdminModal()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-pie text-xs"></i> Admin POS
+        </button>
+      </nav>
+
+      <!-- Right Controls: Currency Toggle + Cart -->
+      <div class="flex items-center gap-3">
+        <!-- Currency Toggle -->
+        <button id="currency-toggle-btn" onclick="toggleCurrency()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-slate-500 text-xs font-semibold transition-all">
+          <span class="text-amber-400"><i class="fa-solid fa-coins"></i></span>
+          <span id="currency-label">USD ($)</span>
+          <span class="text-[10px] text-slate-400 font-normal">៛4,100</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button onclick="openCartDrawer()" class="relative p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700">
+          <i class="fa-solid fa-basket-shopping text-base"></i>
+          <span id="cart-count-badge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#0a0d14] hidden">0</span>
+        </button>
+
+        <!-- Book Now CTA -->
+        <button onclick="scrollToRooms()" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 font-bold text-sm text-white shadow-lg shadow-red-700/30 transition-all transform active:scale-95">
+          <i class="fa-regular fa-calendar-check"></i> Book Room
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-slate-800/60">
+    <!-- Ambient Background Lighting -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-red-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute top-1/3 right-10 w-[400px] h-[300px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/90 border border-slate-700 text-xs font-semibold text-slate-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Premium Private Screening Rooms in Cambodia</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight font-heading">
+            Your Private Cinema.<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-400 to-red-500">
+              Luxury Screening & Gaming.
+            </span>
+          </h1>
+
+          <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+            Reserve private VIP suites equipped with 4K laser projectors, Dolby Atmos surround sound, motorized leather recliners, and gourmet snacks. Pay in seconds via Cambodia's National <strong class="text-white">Bakong KHQR</strong> standard.
+          </p>
+
+          <!-- Highlights Badges -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-800 flex items-center gap-3">
+              <i class="fa-solid fa-tv text-red-400 text-xl"></i>
+              <div>
+                <div class="text-xs font-bold text-white">4K OLED & Laser</div>
+                <div class="text-[11px] text-slate-400">Up to 220" Screen</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-800 flex items-center gap-3">
+              <i class="fa-solid fa-gamepad text-amber-400 text-xl"></i>
+              <div>
+                <div class="text-xs font-bold text-white">PS5 & Netflix</div>
+                <div class="text-[11px] text-slate-400">Plug & Play Media</div>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-800 flex items-center gap-3 col-span-2 sm:col-span-1">
+              <i class="fa-solid fa-qrcode text-emerald-400 text-xl"></i>
+              <div>
+                <div class="text-xs font-bold text-white">Bakong KHQR</div>
+                <div class="text-[11px] text-slate-400">Scan & Instant Verify</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <button onclick="scrollToRooms()" class="px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm shadow-xl shadow-red-600/30 flex items-center gap-2 transition-all transform hover:-translate-y-0.5">
+              <i class="fa-solid fa-door-open"></i> Explore Cinema Rooms
+            </button>
+            <button onclick="openCustomKhqrModal()" class="px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-sm flex items-center gap-2 transition-all">
+              <i class="fa-solid fa-qrcode text-red-400"></i> Test Bakong KHQR
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Interactive Preview Card -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl p-1 bg-gradient-to-b from-red-500/30 via-slate-800/40 to-slate-900 border border-white/10 shadow-2xl">
+            <div class="bg-[#121824] rounded-[22px] overflow-hidden p-6 space-y-5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  <span class="text-xs font-mono text-slate-400 ml-2">BAKONG KHQR PAYWAY</span>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">VERIFIED MERCHANT</span>
+              </div>
+
+              <!-- Merchant Preview Badge -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/70 border border-slate-700/60">
+                <div class="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Cambodia Merchant</div>
+                  <div class="text-sm font-bold text-white">CINEMA ROOM &bull; UNG CHEADEVITH</div>
+                  <div class="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5">
+                    <span>ABA Bank: 124 062 615 395 144</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Booking Promo Preview -->
+              <div class="relative rounded-2xl overflow-hidden aspect-video border border-slate-700 group">
+                <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=800&q=80" alt="VIP Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-4">
+                  <div class="flex justify-between items-end">
+                    <div>
+                      <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">FEATURED SUITE</span>
+                      <h4 class="text-base font-bold text-white font-heading mt-1">The Royal Gold Suite</h4>
+                      <p class="text-xs text-slate-300">Couple Recliners &bull; 4K OLED &bull; Dolby Atmos</p>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-xs text-slate-400">Starting from</div>
+                      <div class="text-lg font-extrabold text-amber-400 font-heading">$15.00 <span class="text-xs text-slate-300 font-normal">/ 2h</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cambodian Banks Supported Ticker -->
+              <div class="pt-1">
+                <div class="text-[11px] text-slate-400 font-medium text-center mb-2">Supported by NBC Bakong Ecosystem:</div>
+                <div class="flex items-center justify-between text-xs text-slate-300 font-bold px-2 py-1.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                  <span class="text-red-400">ABA Mobile</span>
+                  <span class="text-slate-500">&bull;</span>
+                  <span class="text-emerald-400">Bakong</span>
+                  <span class="text-slate-500">&bull;</span>
+                  <span class="text-sky-400">Canadia</span>
+                  <span class="text-slate-500">&bull;</span>
+                  <span class="text-yellow-400">Wing Bank</span>
+                  <span class="text-slate-500">&bull;</span>
+                  <span class="text-blue-400">ACLEDA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cinema Rooms Section -->
+  <section id="rooms-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold text-red-500 tracking-wider uppercase">
+          <i class="fa-solid fa-door-open"></i> Private Screening Rooms
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 font-heading">Choose Your Cinema Experience</h2>
+        <p class="text-slate-400 text-sm mt-1 max-w-xl">Every room comes with soundproof acoustics, luxury seating, high-speed Wi-Fi, and private butler snack service.</p>
+      </div>
+
+      <!-- Capacity Filter -->
+      <div id="room-filters" class="flex flex-wrap gap-2">
+        <button onclick="filterRooms('all')" class="room-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-600 text-white" data-filter="all">All Rooms</button>
+        <button onclick="filterRooms('couple')" class="room-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-filter="couple">Couples (1-2)</button>
+        <button onclick="filterRooms('group')" class="room-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-filter="group">Friends (3-6)</button>
+        <button onclick="filterRooms('party')" class="room-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-filter="party">VIP Party (12+)</button>
+      </div>
+    </div>
+
+    <!-- Rooms Grid -->
+    <div id="rooms-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Injected via JavaScript -->
+      <div class="text-center py-12 col-span-4 text-slate-500">Loading cinema rooms...</div>
+    </div>
+  </section>
+
+  <!-- Movies & Experiences Section -->
+  <section id="movies-section" class="py-16 bg-[#0c101a] border-y border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-400 tracking-wider uppercase">
+          <i class="fa-solid fa-film"></i> Movies & Streaming
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 font-heading">What's on the Screen?</h2>
+        <p class="text-slate-400 text-sm mt-2">Pick from blockbuster releases, anime hits, horror nights, or plug in your own console/laptop with <strong>Bring Your Own Media</strong>.</p>
+      </div>
+
+      <!-- Movies Grid -->
+      <div id="movies-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Concessions & E-Commerce Food Menu Section -->
+  <section id="menu-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold text-red-500 tracking-wider uppercase">
+          <i class="fa-solid fa-bowl-food"></i> Concession Stand
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 font-heading">Cinema Snacks & Drinks</h2>
+        <p class="text-slate-400 text-sm mt-1">Delivered hot and fresh directly to your private room by our cinema butlers.</p>
+      </div>
+
+      <!-- Menu Category Tabs -->
+      <div id="menu-filters" class="flex flex-wrap gap-2">
+        <button onclick="filterMenu('all')" class="menu-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-600 text-white" data-cat="all">All Items</button>
+        <button onclick="filterMenu('Popcorn')" class="menu-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Popcorn">Popcorn</button>
+        <button onclick="filterMenu('Hot Food')" class="menu-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Hot Food">Hot Food</button>
+        <button onclick="filterMenu('Drinks')" class="menu-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Drinks">Drinks</button>
+        <button onclick="filterMenu('Combos')" class="menu-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="Combos">VIP Combos</button>
+      </div>
+    </div>
+
+    <!-- Menu Items Grid -->
+    <div id="menu-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Injected via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Technical Spec & How Bakong KHQR Works (Crucial for School Project Presentation) -->
+  <section id="khqr-spec-section" class="py-16 bg-[#090d16] border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-6 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-400 text-xs font-bold border border-red-500/20">
+            <i class="fa-solid fa-code"></i> E-COMMERCE & PAYMENT API ARCHITECTURE
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-heading">
+            Bakong KHQR Integration
+          </h2>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            This e-commerce cinema room project implements the <strong>National Bank of Cambodia (NBC) KHQR</strong> standard based on EMVCo Tag-Length-Value (TLV) encoding with CRC16-CCITT checksum validation.
+          </p>
+
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/80 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center shrink-0 text-sm font-bold">30</div>
+              <div>
+                <h4 class="text-xs font-bold text-white">Merchant Account Information (Tag 30)</h4>
+                <p class="text-[11px] text-slate-400">Contains Bakong ID (<code class="text-amber-300">abaakhppxxx@abaa</code>), Account (<code class="text-amber-300">124062615395144</code>), and Acquiring Bank (ABA Bank).</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/80 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 text-sm font-bold">54</div>
+              <div>
+                <h4 class="text-xs font-bold text-white">Dynamic Amount & Currency (Tags 53 & 54)</h4>
+                <p class="text-[11px] text-slate-400">Supports USD (Currency Code 840) and KHR (Currency Code 116) with exact dynamic booking amounts.</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/80 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-sm font-bold">63</div>
+              <div>
+                <h4 class="text-xs font-bold text-white">CRC16-CCITT Verification (Tag 63)</h4>
+                <p class="text-[11px] text-slate-400">Calculates polynomial 0x1021 checksum to ensure zero tampering and bank-grade security.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="openCustomKhqrModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-terminal text-red-400"></i> Open Live KHQR Payload Inspector
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 font-mono text-xs text-slate-300 shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] text-slate-400">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-terminal text-emerald-400"></i> KHQR EMVCo Raw Parser
+              </span>
+              <span class="text-emerald-400 font-bold">CRC16 VERIFIED</span>
+            </div>
+            <div class="mt-4 p-3 bg-black/60 rounded-lg text-emerald-400 text-[11px] break-all border border-emerald-500/20" id="tech-payload-preview">
+              00020101021230510016abaakhppxxx@abaa01151240626153951440208ABA Bank520482205303840540515.005802KH5914UNG CHEADEVITH6010PHNOM PENH624268380010PAYWAY@ABA0107100045602090313927796304...
+            </div>
+            <div class="mt-4 space-y-2 text-[11px]">
+              <div class="flex justify-between border-b border-slate-800/60 pb-1">
+                <span class="text-slate-500">Merchant Name:</span>
+                <span class="text-white font-semibold">UNG CHEADEVITH (Cinema Room)</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-800/60 pb-1">
+                <span class="text-slate-500">Acquiring Bank:</span>
+                <span class="text-white font-semibold">ABA Bank (PayWay NBC Ecosystem)</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-800/60 pb-1">
+                <span class="text-slate-500">Bakong Account:</span>
+                <span class="text-amber-400 font-mono">abaakhppxxx@abaa</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Supported Formats:</span>
+                <span class="text-emerald-400">Static (11) & Dynamic (12)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-[#07090f] border-t border-slate-800/60 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white">
+          <i class="fa-solid fa-film"></i>
+        </div>
+        <div>
+          <div class="font-bold text-white font-heading text-sm">CINEMA ROOM CAMBODIA</div>
+          <p>&copy; 2026 E-Commerce School Project &bull; Powered by Bakong KHQR</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#rooms-section" class="hover:text-white">Rooms</a>
+        <a href="#movies-section" class="hover:text-white">Movies</a>
+        <a href="#menu-section" class="hover:text-white">Menu</a>
+        <button onclick="openAdminModal()" class="hover:text-white">Cashier Admin</button>
+      </div>
+
+      <div class="flex items-center gap-2 text-slate-500">
+        <i class="fa-solid fa-shield-cat text-amber-500"></i>
+        <span>Bank-Grade 256-bit EMVCo KHQR</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- MODALS & DRAWERS -->
+  <!-- ============================================================ -->
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeCartDrawer()"></div>
+    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+      <div class="pointer-events-auto w-screen max-w-md bg-[#121824] border-l border-slate-800 flex flex-col">
+        <!-- Header -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-basket-shopping text-red-500"></i>
+            <h3 class="text-lg font-bold text-white font-heading">Your Booking & Cart</h3>
+          </div>
+          <button onclick="closeCartDrawer()" class="text-slate-400 hover:text-white p-2">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Cart Content -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6" id="cart-items-container">
+          <div class="text-center py-12 text-slate-400">
+            <i class="fa-solid fa-couch text-4xl mb-3 text-slate-600"></i>
+            <p>Your cart is empty.</p>
+            <p class="text-xs text-slate-500 mt-1">Select a cinema room or add cinema snacks!</p>
+          </div>
+        </div>
+
+        <!-- Footer / Checkout -->
+        <div class="p-6 border-t border-slate-800 bg-[#0d121c] space-y-4">
+          <div class="space-y-1.5 text-xs text-slate-300">
+            <div class="flex justify-between">
+              <span>Room Subtotal:</span>
+              <span id="cart-room-subtotal" class="font-semibold text-white">$0.00</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Concession Snacks:</span>
+              <span id="cart-snack-subtotal" class="font-semibold text-white">$0.00</span>
+            </div>
+            <div class="flex justify-between pt-2 border-t border-slate-800 text-sm font-bold text-white">
+              <span>Total:</span>
+              <div class="text-right">
+                <span id="cart-total-usd" class="text-amber-400 font-heading text-lg">$0.00</span>
+                <div id="cart-total-khr" class="text-[11px] text-slate-400 font-normal">៛0</div>
+              </div>
+            </div>
+          </div>
+
+          <button id="cart-checkout-btn" onclick="startBookingWizardFromCart()" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span>Proceed to Checkout</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Room Booking Wizard Modal -->
+  <div id="booking-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center p-0">
+      <div class="fixed inset-0 bg-black/80 backdrop-blur-md" onclick="closeBookingModal()"></div>
+
+      <div class="relative bg-[#121824] border border-slate-700/80 rounded-3xl max-w-2xl w-full my-8 text-left shadow-2xl overflow-hidden z-10">
+        <!-- Modal Header -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-[#0e141f]">
+          <div>
+            <span class="text-[10px] font-bold text-red-500 uppercase tracking-widest">STEP-BY-STEP RESERVATION</span>
+            <h3 class="text-xl font-bold text-white font-heading" id="modal-wizard-title">Book Cinema Room</h3>
+          </div>
+          <button onclick="closeBookingModal()" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Wizard Steps Indicator -->
+        <div class="grid grid-cols-3 border-b border-slate-800 text-center text-xs font-semibold">
+          <div id="step-indicator-1" class="py-2.5 border-b-2 border-red-500 text-red-400 bg-red-500/10">1. Room & Time</div>
+          <div id="step-indicator-2" class="py-2.5 border-b-2 border-transparent text-slate-400">2. Movie & Snacks</div>
+          <div id="step-indicator-3" class="py-2.5 border-b-2 border-transparent text-slate-400">3. Customer Info</div>
+        </div>
+
+        <!-- Step 1: Room & Schedule Selection -->
+        <div id="wizard-step-1" class="p-6 space-y-6">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Selected Cinema Room</label>
+            <div id="wizard-selected-room-card" class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-between">
+              <!-- Filled via JS -->
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Screening Date</label>
+              <input type="date" id="wizard-date" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Guests Count</label>
+              <select id="wizard-guests" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+                <option value="1">1 Person</option>
+                <option value="2" selected>2 Persons (Couple)</option>
+                <option value="4">3 - 4 Persons</option>
+                <option value="6">5 - 6 Persons</option>
+                <option value="10">7 - 10 Persons</option>
+                <option value="12">VIP Party (12 Persons)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Select Showtime Slot (2 Hours)</label>
+            <div id="wizard-time-slots" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-4">
+            <button onclick="goToWizardStep(2)" class="px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm flex items-center gap-2">
+              <span>Next: Movie & Snacks</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Movie & Concessions -->
+        <div id="wizard-step-2" class="p-6 space-y-6 hidden">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Choose Movie or Entertainment</label>
+            <select id="wizard-movie-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Quick Concession Add-ons</label>
+              <span class="text-[11px] text-slate-400">Optional Butler Service</span>
+            </div>
+            <div id="wizard-quick-snacks" class="grid sm:grid-cols-2 gap-3 max-h-48 overflow-y-auto pr-1">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <div class="flex justify-between pt-4">
+            <button onclick="goToWizardStep(1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm">
+              <i class="fa-solid fa-arrow-left mr-1"></i> Back
+            </button>
+            <button onclick="goToWizardStep(3)" class="px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-sm flex items-center gap-2">
+              <span>Next: Guest Information</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Customer Information & Final Price -->
+        <div id="wizard-step-3" class="p-6 space-y-6 hidden">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Full Name</label>
+              <input type="text" id="wizard-customer-name" placeholder="e.g. Sopheak Chan" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Phone Number (Cambodia)</label>
+                <input type="tel" id="wizard-customer-phone" placeholder="e.g. 012 345 678" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+                <span class="text-[10px] text-slate-400">For SMS & Telegram Room Access PIN</span>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Email (Optional)</label>
+                <input type="email" id="wizard-customer-email" placeholder="e.g. chan@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-red-500">
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Summary Card -->
+          <div class="p-4 rounded-xl bg-[#0b0e17] border border-slate-800 space-y-2 text-xs">
+            <div class="font-bold text-white text-sm pb-1 border-b border-slate-800 flex justify-between">
+              <span>Booking Summary</span>
+              <span id="wizard-summary-badge" class="text-amber-400">2 Hours Session</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span id="wizard-summary-room-name">The Royal Gold Suite:</span>
+              <span id="wizard-summary-room-price" class="font-semibold text-white">$15.00</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>Snacks & Extras:</span>
+              <span id="wizard-summary-snacks-price" class="font-semibold text-white">$0.00</span>
+            </div>
+            <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-slate-800">
+              <span>Total Payable:</span>
+              <div class="text-right">
+                <span id="wizard-summary-total-usd" class="text-red-500 font-heading">$15.00</span>
+                <div id="wizard-summary-total-khr" class="text-[11px] text-slate-400 font-normal">៛61,500</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between pt-2">
+            <button onclick="goToWizardStep(2)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm">
+              <i class="fa-solid fa-arrow-left mr-1"></i> Back
+            </button>
+            <button onclick="submitBookingOrder()" id="wizard-pay-btn" class="px-7 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-sm shadow-xl shadow-red-600/30 flex items-center gap-2">
+              <i class="fa-solid fa-qrcode text-base"></i>
+              <span>Generate Bakong KHQR</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- OFFICIAL BAKONG KHQR PAYMENT MODAL (USER'S REAL SCAN QR) -->
+  <!-- ============================================================ -->
+  <div id="khqr-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center p-0">
+      <div class="fixed inset-0 bg-black/85 backdrop-blur-md" onclick="closeKhqrModal()"></div>
+
+      <div class="relative bg-white text-slate-900 rounded-3xl max-w-md w-full my-8 text-center shadow-2xl overflow-hidden z-10">
+        <!-- NBC KHQR Red Header Banner -->
+        <div class="bg-[#d32f2f] text-white p-5 relative shadow-md">
+          <button onclick="closeKhqrModal()" class="absolute top-4 right-4 text-white/80 hover:text-white p-1">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+          
+          <div class="flex items-center justify-center gap-2">
+            <!-- KHQR Brand Insignia -->
+            <div class="bg-white text-[#d32f2f] font-black text-xs px-2.5 py-0.5 rounded tracking-widest uppercase shadow">
+              KHQR
+            </div>
+            <span class="text-xs font-semibold tracking-wide text-white/90">Cambodia National QR</span>
+          </div>
+
+          <p class="text-[11px] text-white/80 mt-1">Scan with ABA, Bakong, Wing, Canadia, or Any Banking App</p>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 space-y-4">
+          <!-- Merchant Name & Acquiring Bank Info -->
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Merchant Name</div>
+            <h3 class="text-lg font-black text-slate-900 font-heading" id="khqr-modal-merchant">
+              Cinema Room (UNG CHEADEVITH)
+            </h3>
+            <div class="inline-flex items-center gap-1.5 text-xs text-slate-600 mt-0.5">
+              <i class="fa-solid fa-building-columns text-red-600"></i>
+              <span>ABA Bank &bull; 124 062 615 395 144</span>
+            </div>
+          </div>
+
+          <!-- Total Amount Box -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center justify-between">
+            <div class="text-left">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Total Booking Price</div>
+              <div class="text-2xl font-black text-red-600 font-heading" id="khqr-modal-amount-usd">
+                $15.00
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-bold text-slate-700 bg-slate-200 px-2 py-0.5 rounded">USD</span>
+              <div class="text-xs text-slate-500 mt-1" id="khqr-modal-amount-khr">៛61,500</div>
+            </div>
+          </div>
+
+          <!-- QR Mode Selector: Dynamic vs Original Image -->
+          <div class="flex p-1 bg-slate-100 rounded-xl text-xs font-semibold">
+            <button id="qr-tab-dynamic" onclick="switchQrTab('dynamic')" class="flex-1 py-1.5 rounded-lg bg-white shadow-sm text-red-600 font-bold">
+              Dynamic KHQR (Auto-Amount)
+            </button>
+            <button id="qr-tab-original" onclick="switchQrTab('original')" class="flex-1 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">
+              Original Scan QR
+            </button>
+          </div>
+
+          <!-- QR Code Render Box with Bakong Frame -->
+          <div class="relative mx-auto w-64 h-64 p-3 bg-white border-2 border-red-500 rounded-2xl shadow-inner flex items-center justify-center">
+            <!-- Dynamic QR Image -->
+            <img id="khqr-dynamic-img" src="" alt="Bakong KHQR" class="w-full h-full object-contain">
+            <!-- Original User Uploaded QR Image -->
+            <img id="khqr-original-img" src="/images/user_qr.png" alt="Original QR" class="w-full h-full object-contain hidden">
+
+            <!-- Center Badge for Dynamic KHQR -->
+            <div id="khqr-center-badge" class="absolute w-10 h-10 rounded-full bg-red-600 border-2 border-white flex items-center justify-center shadow-lg pointer-events-none">
+              <i class="fa-solid fa-film text-white text-xs"></i>
+            </div>
+          </div>
+
+          <!-- Live Expiration Countdown & Status -->
+          <div class="flex items-center justify-between text-xs px-2 text-slate-500">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="khqr-poll-status" class="font-medium">Awaiting Bakong scan...</span>
+            </div>
+            <div class="font-mono text-red-600 font-bold" id="khqr-timer">05:00</div>
+          </div>
+
+          <!-- Presentation Action: Simulate Instant Payment -->
+          <div class="pt-1 space-y-2">
+            <button onclick="simulateOrderPayment()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Simulate Payment Complete (School Demo)</span>
+            </button>
+
+            <!-- Helper Action Buttons -->
+            <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+              <button onclick="copyKhqrPayload()" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center gap-1.5">
+                <i class="fa-regular fa-copy"></i> Copy KHQR
+              </button>
+              <a id="khqr-deeplink-btn" href="#" class="py-2 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-mobile-screen-button"></i> Open App
+              </a>
+            </div>
+          </div>
+
+          <!-- Supported Banking Apps Logos / Text -->
+          <div class="pt-2 border-t border-slate-100 text-[10px] text-slate-400 flex items-center justify-center gap-2">
+            <span>ABA</span> &bull; <span>Bakong</span> &bull; <span>Canadia</span> &bull; <span>Wing</span> &bull; <span>ACLEDA</span> &bull; <span>Sathapana</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- DIGITAL CINEMA TICKET & ROOM PIN KEY MODAL -->
+  <!-- ============================================================ -->
+  <div id="ticket-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center p-0">
+      <div class="fixed inset-0 bg-black/85 backdrop-blur-md" onclick="closeTicketModal()"></div>
+
+      <div class="relative max-w-lg w-full my-8 text-left z-10" id="printable-ticket">
+        <div class="cinema-ticket rounded-3xl p-6 shadow-2xl border border-amber-500/40 space-y-6">
+          <!-- Ticket Header -->
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                <i class="fa-solid fa-ticket"></i>
+              </div>
+              <div>
+                <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">OFFICIAL BOARDING PASS</span>
+                <h3 class="text-xl font-extrabold text-white font-heading">CINEMA ROOM VIP</h3>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <i class="fa-solid fa-circle-check mr-1"></i> PAID &bull; BAKONG
+              </span>
+              <div class="text-xs font-mono text-slate-400 mt-1" id="ticket-order-id">CR-849201</div>
+            </div>
+          </div>
+
+          <!-- Room PIN Pass Box -->
+          <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/20 to-red-500/10 border border-amber-500/40 rounded-2xl p-4 text-center">
+            <div class="text-xs uppercase font-bold text-amber-300 tracking-wider">ROOM ACCESS PIN CODE</div>
+            <div class="text-4xl font-extrabold text-white tracking-[0.3em] font-mono my-1" id="ticket-room-pin">
+              8 4 9 2
+            </div>
+            <p class="text-[11px] text-slate-300">Enter this PIN on the door keypad or show to the receptionist</p>
+          </div>
+
+          <!-- Ticket Details -->
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div>
+              <div class="text-slate-400">Cinema Room:</div>
+              <div class="font-bold text-white text-sm" id="ticket-room-name">The Royal Gold Suite</div>
+            </div>
+            <div>
+              <div class="text-slate-400">Movie / Session:</div>
+              <div class="font-bold text-white text-sm" id="ticket-movie-title">Dune: Part Two</div>
+            </div>
+            <div>
+              <div class="text-slate-400">Date & Showtime:</div>
+              <div class="font-bold text-amber-400" id="ticket-datetime">Tonight &bull; 08:00 PM</div>
+            </div>
+            <div>
+              <div class="text-slate-400">Guest Name:</div>
+              <div class="font-bold text-white" id="ticket-guest-name">Sopheak Chan</div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="ticket-divider"></div>
+
+          <!-- Concession Orders Summary -->
+          <div id="ticket-items-box" class="space-y-1 text-xs">
+            <div class="text-slate-400 font-bold uppercase text-[10px]">Concession Snacks:</div>
+            <div id="ticket-items-list" class="text-slate-300">Caramel Popcorn (L) x1, Coke Zero x2</div>
+          </div>
+
+          <!-- Footer with Check-In Barcode / QR -->
+          <div class="flex items-center justify-between pt-2">
+            <div>
+              <div class="text-[10px] text-slate-500">Transaction Reference</div>
+              <div class="text-xs font-mono text-slate-300" id="ticket-tx-ref">BK-948271A</div>
+              <div class="text-[10px] text-slate-400 mt-1">Acquired by ABA Bank (PayWay)</div>
+            </div>
+            <div class="w-16 h-16 bg-white p-1 rounded-lg">
+              <img id="ticket-barcode-img" src="" alt="Door Pass QR" class="w-full h-full object-contain">
+            </div>
+          </div>
+
+          <!-- Print / Close Actions -->
+          <div class="flex gap-3 pt-2">
+            <button onclick="window.print()" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs flex items-center justify-center gap-2">
+              <i class="fa-solid fa-print"></i> Print Ticket / PDF
+            </button>
+            <button onclick="closeTicketModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ADMIN / CASHIER POS DASHBOARD MODAL -->
+  <!-- ============================================================ -->
+  <div id="admin-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center p-0">
+      <div class="fixed inset-0 bg-black/85 backdrop-blur-md" onclick="closeAdminModal()"></div>
+
+      <div class="relative bg-[#121824] border border-slate-700 rounded-3xl max-w-4xl w-full my-8 text-left shadow-2xl overflow-hidden z-10">
+        <!-- Header -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-[#0e141f]">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center text-white">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white font-heading">Cinema Room & POS Dashboard</h3>
+              <p class="text-xs text-slate-400">Real-time Bookings, Revenue & Bakong Transactions</p>
+            </div>
+          </div>
+          <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="p-6 space-y-6">
+          <!-- KPI Cards -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700">
+              <div class="text-xs text-slate-400">Total Revenue (USD)</div>
+              <div class="text-2xl font-bold text-white font-heading mt-1" id="admin-stat-revenue-usd">$0.00</div>
+              <div class="text-[11px] text-emerald-400 mt-1"><i class="fa-solid fa-arrow-trend-up mr-1"></i> Live Sales</div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700">
+              <div class="text-xs text-slate-400">Total Revenue (KHR)</div>
+              <div class="text-2xl font-bold text-amber-400 font-heading mt-1" id="admin-stat-revenue-khr">៛0</div>
+              <div class="text-[11px] text-slate-400 mt-1">Rate: 1$ = 4,100៛</div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700">
+              <div class="text-xs text-slate-400">Paid Bookings</div>
+              <div class="text-2xl font-bold text-emerald-400 font-heading mt-1" id="admin-stat-paid">0</div>
+              <div class="text-[11px] text-slate-400 mt-1">Confirmed via Bakong</div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-800/60 border border-slate-700">
+              <div class="text-xs text-slate-400">Pending Orders</div>
+              <div class="text-2xl font-bold text-amber-400 font-heading mt-1" id="admin-stat-pending">0</div>
+              <div class="text-[11px] text-slate-400 mt-1">Awaiting KHQR Scan</div>
+            </div>
+          </div>
+
+          <!-- Orders Table -->
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h4 class="text-sm font-bold text-white font-heading">Recent Cinema Bookings</h4>
+              <button onclick="loadAdminData()" class="text-xs text-slate-300 hover:text-white px-2 py-1 bg-slate-800 rounded">
+                <i class="fa-solid fa-arrows-rotate mr-1"></i> Refresh
+              </button>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-slate-800">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900 text-slate-400 uppercase font-semibold text-[10px]">
+                  <tr>
+                    <th class="py-3 px-4">Order ID</th>
+                    <th class="py-3 px-4">Customer</th>
+                    <th class="py-3 px-4">Room / Time</th>
+                    <th class="py-3 px-4">Amount</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-table" class="divide-y divide-slate-800/80 bg-slate-900/40">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom KHQR Generator Playground Modal -->
+  <div id="custom-khqr-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="min-h-screen px-4 text-center flex items-center justify-center p-0">
+      <div class="fixed inset-0 bg-black/85 backdrop-blur-md" onclick="closeCustomKhqrModal()"></div>
+
+      <div class="relative bg-[#121824] border border-slate-700 rounded-3xl max-w-lg w-full my-8 text-left shadow-2xl overflow-hidden z-10 p-6 space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-qrcode text-red-500 text-lg"></i>
+            <h3 class="text-lg font-bold text-white font-heading">Interactive Bakong KHQR Generator</h3>
+          </div>
+          <button onclick="closeCustomKhqrModal()" class="text-slate-400 hover:text-white p-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-300">Test generating customized KHQR codes with custom amounts in USD or KHR to demonstrate to your classmates or professor!</p>
+
+        <div class="space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Amount</label>
+              <input type="number" id="custom-qr-amount" value="5.00" step="0.5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Currency</label>
+              <select id="custom-qr-currency" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500">
+                <option value="USD" selected>USD ($ - Code 840)</option>
+                <option value="KHR">KHR (៛ - Code 116)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Bill / Reference Number</label>
+            <input type="text" id="custom-qr-bill" value="CINEMA-DEMO-01" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500">
+          </div>
+        </div>
+
+        <button onclick="generateCustomKhqr()" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center justify-center gap-2">
+          <i class="fa-solid fa-arrows-rotate"></i> Generate Dynamic KHQR
+        </button>
+
+        <div id="custom-qr-result" class="hidden pt-2 text-center space-y-3">
+          <div class="w-48 h-48 mx-auto p-2 bg-white rounded-xl border border-red-500 shadow-md">
+            <img id="custom-qr-img" src="" alt="Generated KHQR" class="w-full h-full object-contain">
+          </div>
+          <div class="text-[11px] font-mono text-emerald-400 break-all p-2 bg-slate-900 rounded border border-slate-800" id="custom-qr-raw"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript App Logic -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

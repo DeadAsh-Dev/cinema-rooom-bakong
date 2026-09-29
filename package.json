@@ -1,0 +1,26 @@
+{
+  "name": "cinema-room-bakong",
+  "version": "1.0.0",
+  "description": "Cinema Room - Cambodia E-Commerce Booking Platform with Bakong KHQR Payment",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "share": "npx localtunnel --port 3000"
+  },
+  "keywords": [
+    "bakong",
+    "khqr",
+    "cinema",
+    "ecommerce",
+    "cambodia",
+    "booking"
+  ],
+  "author": "Cinema Room Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4"
+  }
+}
